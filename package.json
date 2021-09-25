@@ -28,6 +28,9 @@
   "bugs": {
     "url": "https://github.com/chapman-darlene/cse341-prove/issues"
   },
+  "engines": {
+    "node": "v16.9.1"
+  },
   "homepage": "https://github.com/chapman-darlene/cse341-prove#readme",
   "description": ""
 }
