@@ -43,7 +43,8 @@ router.post('/add-product', (req, res, next) => {
 
 
 router.post('/remove-product', (req, res, next) => {
-  products.pop({ title: req.body.title });
+
+  products.splice({ title: req.body.title }, 1);
   res.redirect('/');
 });
 
