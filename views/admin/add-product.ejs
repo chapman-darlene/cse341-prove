@@ -1,0 +1,39 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <form class="product-form" action="/admin/add-product" method="POST">
+            <div class="form-control">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title">
+            </div>
+            <div class="form-control">
+                <label for="imageUrl">Image</label>
+                <input type="text" name="imageUrl" id="imageUrl">
+            </div>
+            <div class="form-control">
+                <label for="price">Price</label>
+                <input type="number" min="0.01" step="0.01" max="1000" name="price" id="price">
+            </div>
+            <div class="form-control">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" rows="5"></textarea>
+            </div>
+            <div class="form-control, radio-control">
+                <h4 class="radio-control">Rating</h4>               
+                <input type="radio" id="one" name="rating" value="One Star"><label for="one"></label>One Star</label><br>
+                <input type="radio" id="two" name="rating" value="Two Stars"><label for="two">Two Stars</label><br>
+                <input type="radio" id="three" name="rating" value="Three Stars"><label for="three">Three Stars</label><br>
+                <input type="radio" id="four" name="rating" value="Four Stars"><label for="four">Four Stars</label><br>
+                <input type="radio" id="five"  name="rating" value="Five Stars"><label for="five">Five Stars</label><br>
+            </div>
+            <br>
+            <button class="btn" type="submit">Add Product</button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>
