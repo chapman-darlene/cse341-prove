@@ -27,3 +27,20 @@ exports.getProducts = (req, res, next) => {
         });
     });
 };
+
+//need to work on
+// exports.postEditProduct = (req, res, next) => {
+//     const title = req.body.title;
+//     const imageUrl = req.body.imageUrl;
+//     const price = req.body.price;
+//     const description = req.body.description;
+//     const rating = req.body.rating;
+//     const product = new Product(title, imageUrl, price, description, rating);
+//     product.save();
+//     res.redirect('/');
+// };
+
+//exports.postDeleteProduct = (req, res, next) => {
+//    slice('', 1);
+//     res.redirect('/');
+// };
