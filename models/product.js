@@ -23,12 +23,11 @@ module.exports = class Product {
     this.imageUrl = imageUrl;
     this.price = price;
     this.description = description;
-    this.rating = rating;
+    this.rating = rating;   
   }
 
   save() {
     this.id = Math.random().toString();
-    console.log(this.id);
     getProductsFromFile(products => {
       products.push(this);
       fs.writeFile(p, JSON.stringify(products), err => {
@@ -45,6 +44,6 @@ module.exports = class Product {
     getProductsFromFile(products => {
       const product = products.find(p => p.id === id);
       cb(product);
-    })
+    });
   }
 };
