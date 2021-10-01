@@ -3,6 +3,7 @@ const express = require('express');
 const errorController = require('./controllers/error');
 
 const PORT = process.env.PORT || 5000;
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -19,5 +20,4 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-app.listen(PORT);
-
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));

@@ -19,15 +19,6 @@ form {
   display: inline;
 }
 
-.centered {
-  text-align: center;
-  margin: 2em;
-}
-
-.centered img {
-  max-width: 50%;
-}
-
 .main-header {
   width: 100%;
   height: 3.5rem;
@@ -64,6 +55,23 @@ form {
 .main-header__item a:active,
 .main-header__item a.active {
   color: #ffeb3b;
+}
+
+.centered {
+  text-align: center;
+}
+
+.centered img {
+  text-align: center;
+  max-width: 30%;
+  max-height: 30%;
+}
+
+.cart {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 1rem;
 }
 
 .mobile-nav {
@@ -148,6 +156,7 @@ form {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: stretch;
+  max-width: 80%;
 }
 
 .card {
