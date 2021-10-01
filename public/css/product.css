@@ -29,7 +29,5 @@
 }
 
 .product__image {
-  width: auto;
-  height: 150px;
-  padding-bottom: 1rem;
+  width: 100%;
 }
