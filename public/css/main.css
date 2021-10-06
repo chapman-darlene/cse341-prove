@@ -59,11 +59,13 @@ form {
 
 .centered {
   text-align: center;
+  margin-left: 10vw;
+  margin-right: 10vw;
 }
 
 .centered img {
   text-align: center;
-  max-width: 30%;
+  max-width: auto;
   max-height: 30%;
 }
 
@@ -174,11 +176,15 @@ form {
   margin: 0;
 }
 
-.card__image {
-  width: 100%;
+.card__image-box {
+  max-height: 30vh;
+  margin-bottom: 3rem;
+  width: auto;
 }
 
-.card__image img {
+.card__image {
+  display: flex;
+  justify-content: center;
   width: 100%;
 }
 
