@@ -21,6 +21,10 @@ const userSchema = new Schema({
           quantity: {
             type: Number,
             required: true
+          },
+          price: {
+            type: Number,
+            require: true
           }
         }]
     }
@@ -30,21 +34,33 @@ userSchema.methods.addToCart = function (product) {
     const cartProductIndex = this.cart.items.findIndex(cp => {
       return cp.productId.toString() === product._id.toString();
     });
-    let newQuantity = 1;
+  let newQuantity = 1;
+  let newPrice = product.price;
     const updatedCartItems = [...this.cart.items];
   
-    if (cartProductIndex >= 0) {
+  if (cartProductIndex >= 0) {
       newQuantity = this.cart.items[cartProductIndex].quantity + 1;
+      newPrice = newPrice * newQuantity;
       updatedCartItems[cartProductIndex].quantity = newQuantity;
+      updatedCartItems[cartProductIndex].price = newPrice;
+      
     } else {
       updatedCartItems.push({
         productId: product._id,
-        quantity: newQuantity
-      });
-    }
-    const updatedCart = {
-      items: updatedCartItems
-    };
+        price: newPrice,
+        quantity: newQuantity,
+      }); 
+  }
+
+  //take all objects from cart and add the total price.
+      const updatedCart = {
+        items: updatedCartItems
+  };
+
+  console.log(updatedCart)
+
+
+  
     this.cart = updatedCart;
     return this.save();  
 };
