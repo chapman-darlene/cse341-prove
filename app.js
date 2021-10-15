@@ -11,7 +11,7 @@ const flash = require('connect-flash');
 const dotenv = require('dotenv').config();
 
 // console.log(process.env);
-const app = express();
+
 
 const PORT = process.env.PORT || 5000;
 
@@ -27,6 +27,7 @@ const store = new MongoDBStore({
 
 //cross-site scripting token protection
 const csrfProtect = csrf();
+const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
