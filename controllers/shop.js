@@ -9,6 +9,8 @@ auth: {
 }
 }));
 
+const SG_EMAIL = process.env.SG_EMAIL;
+
 const Product = require('../models/product');
 const Order = require('../models/order');
 const User = require('../models/user');
@@ -114,7 +116,7 @@ exports.postOrder = (req, res, next) => {
       res.redirect('/orders');
       return transporter.sendMail({
             to: req.user.email,
-            from: 'djunk45@msn.com',
+            from: SG_EMAIL,
             subject: 'Order',
             html: '<p>Dear ' + req.user.name + ', <br>You successfully created an account</p>'
           });

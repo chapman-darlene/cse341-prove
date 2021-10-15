@@ -12,6 +12,8 @@ auth: {
 }
 }));
 
+const SG_EMAIL = process.env.SG_EMAIL;
+
 exports.getLogin = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
@@ -101,7 +103,7 @@ exports.postSignup = (req, res, next) => {
           res.redirect('/login');
           return transporter.sendMail({
             to: email,
-            from: 'djunk45@msn.com',
+            from: SG_EMAIL,
             subject: 'Signup Success',
             html: '<p>Dear ' + name + ', <br>You successfully created an account</p>'
           });
