@@ -10,7 +10,6 @@ const dotenv = require('dotenv').config();
 
 // console.log(process.env);
 
-
 const PORT = process.env.PORT || 5000;
 
 const errorController = require('./controllers/error');
