@@ -11,6 +11,7 @@ const flash = require('connect-flash');
 const dotenv = require('dotenv').config();
 
 // console.log(process.env);
+const app = express();
 
 const PORT = process.env.PORT || 5000;
 
@@ -18,8 +19,6 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 
 const MONGODB_URI = process.env.MONGODB_URI
-
-const app = express();
 
 const store = new MongoDBStore({
   uri: MONGODB_URI,
