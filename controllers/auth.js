@@ -105,7 +105,7 @@ exports.postSignup = (req, res, next) => {
             to: email,
             from: SG_EMAIL,
             subject: 'Signup Success',
-            html: '<p>Dear ' + name + ', <br>You successfully created an account</p>'
+            html: '<p>Dear ' + name + ', <br>You successfully created an account. We look forward to assisting in recommending the best books to you. Sincerely,<br>This student shopping app.</p>'
           });
         })
         .catch(err => console.log(err));

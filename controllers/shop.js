@@ -118,7 +118,7 @@ exports.postOrder = (req, res, next) => {
             to: req.user.email,
             from: SG_EMAIL,
             subject: 'Order',
-            html: '<p>Dear ' + req.user.name + ', <br>You successfully created an account</p>'
+            html: '<p>Dear ' + req.user.name + ', <br>You order was successfully placed. We hope you enjoy your books.</p>'
           });
     })
     .catch(err => console.log(err));
