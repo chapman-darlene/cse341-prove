@@ -2,10 +2,10 @@ const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const dotenv = require('dotenv').config();
 
-const api_key = process.env.API_KEY;
+const api_key = process.env.SG_API_KEY;
 const transporter = nodemailer.createTransport(sendgridTransport({
 auth: {
-  api_key: process.env.API_KEY
+  api_key: process.env.SG_API_KEY
 }
 }));
 
