@@ -1,18 +1,18 @@
 const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer');
-const sendgridTransport = require('nodemailer-sendgrid-transport');
+// const nodemailer = require('nodemailer');
+// const sendgridTransport = require('nodemailer-sendgrid-transport');
 require('dotenv').config();
 
 const User = require('../models/user');
 
-const api_key = process.env.SG_API_KEY;
-const transporter = nodemailer.createTransport(sendgridTransport({
-auth: {
-    api_key: process.env.SG_API_KEY
-}
-}));
+// const api_key = process.env.SG_API_KEY;
+// const transporter = nodemailer.createTransport(sendgridTransport({
+// auth: {
+//     api_key: process.env.SG_API_KEY
+// }
+// }));
 
-const SG_EMAIL = process.env.SG_EMAIL;
+// const SG_EMAIL = process.env.SG_EMAIL;
 
 exports.getLogin = (req, res, next) => {
   let message = req.flash('error');
@@ -101,12 +101,12 @@ exports.postSignup = (req, res, next) => {
         })
         .then(result => {
           res.redirect('/login');
-          return transporter.sendMail({
-            to: email,
-            from: SG_EMAIL,
-            subject: 'Signup Success',
-            html: '<p>Dear ' + name + ', <br>You successfully created an account. We look forward to assisting in recommending the best books to you. Sincerely,<br>This student shopping app.</p>'
-          });
+          // return transporter.sendMail({
+          //   to: email,
+          //   from: SG_EMAIL,
+          //   subject: 'Signup Success',
+          //   html: '<p>Dear ' + name + ', <br>You successfully created an account. We look forward to assisting in recommending the best books to you. Sincerely,<br>This student shopping app.</p>'
+          // });
         })
         .catch(err => console.log(err));
     })
