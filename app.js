@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5000;
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://general_user:MfmpJaqtRKJ0XU3P@cse341.kzoh1.mongodb.net/shop?retryWrites=true&w=majority";
 
 const store = new MongoDBStore({
   uri: MONGODB_URI,
