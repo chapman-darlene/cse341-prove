@@ -76,7 +76,7 @@ const options = {
     useNewUrlParser: true,
     //useCreateIndex: true, //deprecated
     //useFindAndModify: false, //deprecated
-    //family: 4
+    family: 4
 };
 //end of heroku and mongodb connection options
 
