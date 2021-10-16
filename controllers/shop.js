@@ -1,15 +1,15 @@
-// const nodemailer = require('nodemailer');
-// const sendgridTransport = require('nodemailer-sendgrid-transport');
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
 require('dotenv').config();
 
-// const api_key = process.env.SG_API_KEY;
-// const transporter = nodemailer.createTransport(sendgridTransport({
-// auth: {
-//   api_key: process.env.SG_API_KEY
-// }
-// }));
+const api_key = process.env.SG_API_KEY;
+const transporter = nodemailer.createTransport(sendgridTransport({
+auth: {
+  api_key: process.env.SG_API_KEY
+}
+}));
 
-// const SG_EMAIL = process.env.SG_EMAIL;
+const SG_EMAIL = process.env.SG_EMAIL;
 
 const Product = require('../models/product');
 const Order = require('../models/order');
@@ -114,12 +114,12 @@ exports.postOrder = (req, res, next) => {
     })
     .then(() => {
       res.redirect('/orders');
-      // return transporter.sendMail({
-      //       to: req.user.email,
-      //       from: SG_EMAIL,
-      //       subject: 'Order',
-      //       html: '<p>Dear ' + req.user.name + ', <br>You order was successfully placed. We hope you enjoy your books.</p>'
-      //     });
+      return transporter.sendMail({
+        to: req.user.email,
+        from: SG_EMAIL,
+        subject: 'Order',
+        html: '<p>Dear ' + req.user.name + ', <br>You order was successfully placed. We hope you enjoy your books.</p>'
+      });
     })
     .catch(err => console.log(err));
 };
