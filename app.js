@@ -6,7 +6,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 
 // console.log(process.env);
 const app = express();
