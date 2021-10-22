@@ -27,7 +27,7 @@
 }
 
 .product__image {
-  max-height: 50%;
+  max-height: 25vh;
   width: auto;
 }
 
