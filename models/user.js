@@ -9,13 +9,15 @@ const userSchema = new Schema({
     required: true
   },   
     email: {
-        type: String,
-        required: true
+    type: String,
+    required: true
   },
     password: {
       type: String,
       required: true
-    },
+  },
+  resetToken: String,
+  resetTokenExpiration: Date,
   cart: {
       items: [{
         productId: {
@@ -32,15 +34,16 @@ const userSchema = new Schema({
           require: true
         }
       }]
-    }
+  }
 });
 
 userSchema.methods.addToCart = function (product) {
     const cartProductIndex = this.cart.items.findIndex(cp => {
       return cp.productId.toString() === product._id.toString();
     });
-  let newQuantity = 1;
-  let newPrice = product.price;
+  
+    let newQuantity = 1;
+    let newPrice = product.price;
     const updatedCartItems = [...this.cart.items];
   
   if (cartProductIndex >= 0) {
@@ -48,23 +51,21 @@ userSchema.methods.addToCart = function (product) {
       newPrice = newPrice * newQuantity;
       updatedCartItems[cartProductIndex].quantity = newQuantity;
       updatedCartItems[cartProductIndex].price = newPrice;
-      
-    } else {
-      updatedCartItems.push({
-        productId: product._id,
-        price: newPrice,
-        quantity: newQuantity,
-      }); 
+  } else {
+    updatedCartItems.push({
+      productId: product._id,
+      price: newPrice,
+      quantity: newQuantity
+    });
   }
-
-  //take all objects from cart and add the total price.
+  
   const updatedCart = {
     items: updatedCartItems
-  }; 
-    this.cart = updatedCart;
-    return this.save();  
+  };
+  
+  this.cart = updatedCart;
+  return this.save();  
 };
-
 
 userSchema.methods.removeFromCart = function (productId) {
   const updatedCartItems = this.cart.items.filter(item => {

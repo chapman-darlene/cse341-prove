@@ -22,10 +22,12 @@
         </ul>
         <hr>
         <div class="centered">
+            <h2>Cart Total <%= totalSum %></h2>
             <form action="/create-order" method="POST">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button type="submit" class="btn">Order Now!</button>
             </form>
+            <!-- <a href="/checkout" class="btn">Checkout</a> -->
         </div>
 
         <% } else { %>

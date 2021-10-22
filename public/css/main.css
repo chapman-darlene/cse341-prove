@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 
 * {
   box-sizing: border-box;
@@ -7,7 +9,7 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Montserrat", "Open Sans", sans-serif;
 }
 
 main {
@@ -169,6 +171,11 @@ form {
   align-items: stretch;
 }
 
+.card__detail {
+  align-items: center;
+  margin: 4rem 2rem;
+}
+
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
@@ -182,15 +189,24 @@ form {
 .card__content h1,
 .card__content h2,
 .card__content p {
+  font: "Montserat";
   margin: 0;
 }
 
 .card__image {
+  display: flex;
+  justify-content: center;
   width: 100%;
 }
 
 .card__image img {
-  width: 100%;
+  margin: 3vh 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  width: auto;
+  max-height: 50vh;
 }
 
 .card__actions {
@@ -213,6 +229,7 @@ form {
   background: white;
   border-radius: 3px;
   cursor: pointer;
+  margin: 2vh 0;
 }
 
 .btn:hover,
