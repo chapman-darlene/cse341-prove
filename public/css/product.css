@@ -7,7 +7,7 @@
 
 .product-item {
   width: 20rem;
-  max-width: 95%;
+  max-width: 100%;
   margin: 1rem;
 }
 
@@ -27,11 +27,12 @@
 }
 
 .product__image {
-  max-height: 25vh;
+  max-height: 30vh;
+  padding: 2rem;
   width: auto;
 }
 
 .product__detail-description {
   text-align: center;
-  padding: 0 2rem;
+  padding: 2rem;
 }
