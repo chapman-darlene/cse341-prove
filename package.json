@@ -1,6 +1,25 @@
 {
+  "name": "cse341-team-project",
+  "version": "1.0.0",
+  "description": "cse341 team_1 project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-server": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chapman-darlene/cse341-team-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chapman-darlene/cse341-team-project/issues"
+  },
+  "homepage": "https://github.com/chapman-darlene/cse341-team-project#readme",
   "dependencies": {
-    "@sendgrid/mail": "^7.4.7",
+    "@sendgrid/mail": "^7.6.0",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^3.1.1",
@@ -9,36 +28,10 @@
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "express-handlebars": "^5.3.3",
     "express-session": "^1.17.2",
     "express-validator": "^6.13.0",
-    "mongodb": "^4.1.2",
-    "mongoose": "^6.0.9",
-    "nodemailer": "^6.7.0",
-    "nodemailer-sendgrid-transport": "^0.2.0",
-    "nodemon": "^2.0.12",
-    "sass": "^1.42.1",
-    "scss": "^0.2.4"
-  },
-  "name": "cse341-prove",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chapman-darlene/cse341-prove.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/chapman-darlene/cse341-prove/issues"
-  },
-  "engines": {
-    "node": "v16.9.1"
-  },
-  "homepage": "https://github.com/chapman-darlene/cse341-prove#readme",
-  "description": ""
+    "mongodb": "^4.1.3",
+    "mongoose": "^6.0.12",
+    "nodemon": "^2.0.14"
+  }
 }

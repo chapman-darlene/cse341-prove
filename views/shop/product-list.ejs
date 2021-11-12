@@ -15,6 +15,12 @@
                         <%= product.title %>
                     </h1>
                 </header>
+                <div class="card__content">
+                    <p class="product__date">Date: <%= product.date %></p>
+                </div>
+                <div class="card__content">
+                    <p class="product__time">Date: <%= product.time %></p>
+                </div>
                 <div class="card__image card__image-box">
                     <img class="product__image" src="<%= product.imageUrl %>" alt="<%= product.title %>">
                 </div>
@@ -24,9 +30,6 @@
                         <%= product.description %>
                     </p>
                 </div>
-                <div class="card__content">
-                    <p class="product__author">Author: <%= product.author %></p>
-                </div>
                 <div class="card__actions">
                     <a href="/products/<%= product._id %>" class="btn">Details</a>
                     <% if (isAuthenticated) { %>
@@ -35,6 +38,9 @@
                 </div>
             </article>
             <% } %>
+        </div>
+        <div class="pagination">
+            <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
         </div>
         <% } else { %>
         <h1>No Products Found!</h1>
