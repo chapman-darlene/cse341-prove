@@ -1,20 +1,18 @@
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer');
-const sendgridTransport = require('nodemailer-sendgrid-transport');
 const { validationResult } = require('express-validator');
 require('dotenv').config();
 
 const User = require('../models/user');
 
-const api_key = process.env.SG_API_KEY;
-const transporter = nodemailer.createTransport(sendgridTransport({
-auth: {
-    api_key: process.env.SG_API_KEY
-}
-}));
+// const api_key = process.env.SG_API_KEY;
+// const transporter = nodemailer.createTransport(sendgridTransport({
+// auth: {
+//     api_key: process.env.SG_API_KEY
+// }
+// }));
 
-const SG_EMAIL = process.env.SG_EMAIL;
+// const SG_EMAIL = process.env.SG_EMAIL;
 
 
 //start getLogin Middleware
@@ -99,6 +97,7 @@ exports.postLogin = (req, res, next) => {
           if (doMatch) {
             req.session.isLoggedIn = true;
             req.session.user = user;
+            req.session.isAdmin = user.role === 'admin' ? true : false;
             return req.session.save(err => {
               console.log(err);
               res.redirect('/');
@@ -164,12 +163,12 @@ exports.postSignup = (req, res, next) => {
     })
     .then(result => {
       res.redirect('/login');
-      return transporter.sendMail({
-        to: email,
-        from: SG_EMAIL,
-        subject: 'Signup Success',
-        html: `<p>Dear ${name}, <br>You successfully created an account. We look forward to assisting in recommending the best books to you. Sincerely,<br>This student shopping app.</p>`
-      });
+      // return transporter.sendMail({
+      //   to: email,
+      //   from: SG_EMAIL,
+      //   subject: 'Signup Success',
+      //   html: `<p>Dear ${name}, <br>You successfully created an account. We look forward to assisting in recommending the best books to you. Sincerely,<br>This student shopping app.</p>`
+      // });
     })
     .catch(err => {
       const error = new Error(err);
@@ -224,16 +223,16 @@ exports.postReset = (req, res, next) => {
       })
       .then(result => {
         res.redirect('/');
-        transporter.sendMail({
-          to: req.body.email,
-         from: SG_EMAIL,
-          subject: 'Password reset',
-          html: `
-            <p>You requested a password reset</p>
-            <p>Click this <a href="http://localhost:5000/reset/${token}">link</a> to set a new password.</p>
-            <p>If this was not something you requested, contact client support</p>
-          `
-        });
+        // transporter.sendMail({
+        //   to: req.body.email,
+        //  from: SG_EMAIL,
+        //   subject: 'Password reset',
+        //   html: `
+        //     <p>You requested a password reset</p>
+        //     <p>Click this <a href="http://localhost:5000/reset/${token}">link</a> to set a new password.</p>
+        //     <p>If this was not something you requested, contact client support</p>
+        //   `
+        // });
       })
       .catch(err => {
         const error = new Error(err);

@@ -1,18 +1,13 @@
-const nodemailer = require('nodemailer');
-const sendgridTransport = require('nodemailer-sendgrid-transport');
+//const nodemailer = require('nodemailer');
+//const sendgridTransport = require('nodemailer-sendgrid-transport');
 const Product = require('../models/product');
 const Order = require('../models/order');
 const User = require('../models/user');
 require('dotenv').config();
 
-const api_key = process.env.SG_API_KEY;
-const transporter = nodemailer.createTransport(sendgridTransport({
-auth: {
-  api_key: process.env.SG_API_KEY
-}
-}));
+const ITEMS_PER_PAGE = 3;
 
-const SG_EMAIL = process.env.SG_EMAIL;
+// const SG_EMAIL = process.env.SG_EMAIL;
 
 
 //start getProducts Middleware
@@ -36,13 +31,28 @@ exports.getProducts = (req, res, next) => {
 
 //Start getProduct middleware
 exports.getProduct = (req, res, next) => {
-  const prodId = req.params.productId;
-  Product.findById(prodId)
-    .then(product => {
-      res.render('shop/product-detail', {
-        product: product,
-        pageTitle: product.title,
-        path: '/products'
+  const page = +req.query.page || 1;
+  let totalItems;
+
+  Product.find()
+    .countDocuments()
+    .then(numProducts => {
+      totalItems = numProducts;
+      return Product.find()
+        .skip((page - 1) * ITEMS_PER_PAGE)
+        .limit(ITEMS_PER_PAGE);
+    })
+    .then(products => {
+      res.render('shop/product-list', {
+        prods: products,
+        pageTitle: 'Products',
+        path: '/products',
+        currentPage: page,
+        hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+        hasPreviousPage: page > 1,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
       });
     })
     .catch(err => {
@@ -56,12 +66,28 @@ exports.getProduct = (req, res, next) => {
 
 //Start getIndex Middleware
 exports.getIndex = (req, res, next) => {
+  const page = +req.query.page || 1;
+  let totalItems;
+
   Product.find()
+    .countDocuments()
+    .then(numProducts => {
+      totalItems = numProducts;
+      return Product.find()
+      .skip((page - 1) * ITEMS_PER_PAGE)
+      .limit(ITEMS_PER_PAGE)
+    })    
     .then(products => {
       res.render('shop/index', {
         prods: products,
         pageTitle: 'Shop',
-        path: '/'
+        path: '/',
+        currentPage: page,
+        hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+        hasPreviousPage: page > 1,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
       });
     })
     .catch(err => {
@@ -70,7 +96,6 @@ exports.getIndex = (req, res, next) => {
       return next(error);
     });
 }; //End getIndex middleware
-
 
 //Start getCart middleware
 exports.getCart = (req, res, next) => {
@@ -215,3 +240,4 @@ exports.getOrders = (req, res, next) => {
       return next(error);
     });
 }; //End getOrder middleware
+
