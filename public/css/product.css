@@ -32,6 +32,7 @@
 
 .product__image {
   max-width: 15vw;
+  max-height: 30vh;
   padding: 2rem;
   width: auto;
 }
