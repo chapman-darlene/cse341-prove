@@ -6,7 +6,7 @@ const Product = require('../models/product');
 //startgetAddProduct Middleware
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
-    pageTitle: 'Add Product',
+    pageTitle: 'Add Activity',
     path: '/admin/add-product',
     editing: false,
     hasError: false,
@@ -29,7 +29,7 @@ exports.postAddProduct = (req, res, next) => {
   if (!errors.isEmpty()) {
     console.log(errors.array());
       return res.status(422).render('admin/edit-product', {
-      pageTitle: 'Add Product',
+      pageTitle: 'Add Activity',
       path: '/admin/add-product',
       editing: false,
       hasError: true,
@@ -41,7 +41,7 @@ exports.postAddProduct = (req, res, next) => {
         price: price,
         description: description
         },
-     errorMessage: errors.array()[0].msg,
+      errorMessage: errors.array()[0].msg,
       validationErrors: errors.array()
     });
   }
@@ -83,7 +83,7 @@ exports.getEditProduct = (req, res, next) => {
         return res.redirect('/');
       }
       res.render('admin/edit-product', {
-        pageTitle: 'Edit Product',
+        pageTitle: 'Edit Activity',
         path: '/admin/edit-product',
         //should this be add-product?
         editing: editMode,
@@ -115,7 +115,7 @@ exports.postEditProduct = (req, res, next) => {
 
   if (!errors.isEmpty()) {
     return res.status(422).render('admin/edit-product', {
-      pageTitle: 'Edit Product',
+      pageTitle: 'Edit Activity',
       path: '/admin/edit-product',
       editing: true,
       hasError: true,
@@ -135,9 +135,6 @@ exports.postEditProduct = (req, res, next) => {
 
   Product.findById(prodId)
     .then(product => {
-      if (product.userId.toString() !== req.user._id.toString()) {
-        return res.redirect('/');
-      }
       product.title = updatedTitle;
       product.date = updatedDate;
       product.time = updatedTime;
@@ -160,14 +157,15 @@ exports.postEditProduct = (req, res, next) => {
 
 //start getProducts Middleware
 exports.getProducts = (req, res, next) => {
-  Product.find({ userId: req.user._id })
+  //Product.find({ userId: req.user._id })
+  Product.find({prodId: req._id})
     // .select('title price -_id')
     // .populate('userId', 'name')
     .then(products => {
       //console.log(products);
       res.render('admin/products', {
         prods: products,
-        pageTitle: 'Admin Products',
+        pageTitle: 'Admin Activities',
         path: '/admin/products'
       });
     })
@@ -180,21 +178,16 @@ exports.getProducts = (req, res, next) => {
 
 
 //start postDeleteProduct Middleware
-exports.deleteProduct = (req, res, next) => {
-  const prodId = req.params.productId;
-  Product.findById(prodId)
-    .then(product => {
-      if (!product) {
-        return next(new Error('Product not found'));
-      }
-      filehelper.deleteFile(product.imageUrl);
-      return Product.deleteOne({ _id: prodId, userId: req.user._id });
-    })
+exports.postDeleteProduct = (req, res, next) => {
+  const prodId = req.body.productId;
+  Product.deleteOne({ _id: prodId, userId: req.user._id })
     .then(() => {
       console.log('DESTROYED PRODUCT');
-      res.status(200).json({ message: 'Product deletion was succesful' });
+      res.redirect('/admin/products');
     })
     .catch(err => {
-      res.status(500).json({ message: 'Product deletion failed' });
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };//end postDeleteProduct
